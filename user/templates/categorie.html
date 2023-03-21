@@ -1,0 +1,113 @@
+{% extends './element/main.html' %}
+
+
+{% block css %}{% endblock css %}
+
+{% block content %}
+<section class="sptb">
+    <div class="container">
+        <div class="row"> <!--Left Side Content-->
+            <div class="col-xl-3 col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="input-group"> <input type="text" class="form-control br-ts-7 br-bs-7"
+                                placeholder="Search">
+                            <div class="input-group-text "> <button type="button"
+                                    class="btn btn-primary br-te-7 br-be-7"> Search </button> </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div> <!--/Left Side Content-->
+            <div class="col-xl-9 col-lg-8 col-md-12"> <!--Coursed lists-->
+                <div class="mb-lg-0">
+                    <div class="">
+                        <div class="item2-gl ">
+                        
+                            <div class="tab-content item-list1">
+                                <div class="tab-pane active" id="tab-11">
+
+                                    {% for item in articles %}
+                                        <div class="card overflow-hidden">
+                                            <div class="d-md-flex">
+                                                <div class="item-card9-img">
+                                                    <div class="item-card9-imgs"> <a href="{% url 'article' item.id %}"></a> <img
+                                                            src="{{ item.image.url }}" alt="img"
+                                                            class="cover-image"> </div>
+                                                    <div class="item-card9-icons"> <a href="{% url 'article' item.id %}"
+                                                            class="item-card9-icons1 bg-primary"> <i
+                                                                class="fa fa fa-heart"></i></a> <a href="javascript:void(0)"
+                                                            class="item-card9-icons1 bg-secondary"> <i
+                                                                class="fa fa fa-share-alt"></i></a> </div>
+                                                    <div class="item-overly-trans"> <a href="{% url 'article' item.id %}"
+                                                            class="bg-primary">Popular</a> </div>
+                                                </div>
+                                                <div class="card border-0 mb-0">
+                                                    <div class="card-body ">
+                                                        <div class="item-card9"> <a href="{% url 'article' item.id %}"
+                                                                class="text-default-dark">
+                                                                <h3 class="">{{ item.title }}</h3>
+                                                            </a>
+                                                            <p class="mb-0 mt-1 lead"> {{ item.description }} </p>
+                                                            <div class="mt-2 mb-2">
+                                                                <ul class="icon-card-1">
+                                                                    <li class="me-3"><span class="fs-14"><i
+                                                                                class="fa fa-briefcase me-1"></i>
+                                                                           #{{item.categorie}}</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <!--<h4
+                                                            class="font-weight-semibold mb-0  mt-4 mb-0 fs-20 text-dark">
+                                                            <i class="fe fe-tag mt-0 text-muted fs-18 me-2"></i> __
+                                                        </h4>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+
+
+
+                                    {% if n_t > 5 %}
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to {{articles|length}} of {{n_t}}
+                                                    entries</div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous {% if articles.0.id == 1 %}disabled{% endif %}" id="DataTables_Table_0_previous"><a href="{% url 'articles' n_p %}" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                        
+                                                        
+                                                        {% for item in p %}
+                                                            <li class="paginate_button page-item {% if pos == item %}active{% endif %}"><a href="{% url 'articles' item %}" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" class="page-link">{{item}}</a></li>
+                                                        {% endfor %}
+                                                        <!--<li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                                        <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>-->
+                                                        <li class="paginate_button page-item next {% if p|last == pos %}disabled{% endif %}" id="DataTables_Table_0_next"><a href="{% url 'articles' id n_n %}" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                    </ul>
+                                                    <br>                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                   
+                                </div>
+                                
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div> <!--/Coursed lists-->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+
+{% endblock js %}

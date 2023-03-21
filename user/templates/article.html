@@ -1,0 +1,186 @@
+{% extends './element/main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/CHAT.css' %}">
+{% endblock css %}
+{% block content %}
+<section class="sptb">
+    <div class="container">
+        <div class="row"> <!--Left Side Content-->
+
+            <section class="sptb">
+                <div class="container">
+                    <div class="row"> <!--Left Side Content-->
+                        <div class="col-xl-4 col-lg-4 col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="input-group"> <input type="text"
+                                            class="form-control br-ts-7  br-bs-7" placeholder="Search">
+                                        <div class="input-group-text "> <button type="button"
+                                                class="btn btn-primary br-te-7 br-be-7"> Search </button> </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="card">
+                                <div class="text-center">
+                                    <img class="rounded" src="{% static 'images/logo.png' %}" alt="Card image cap"
+                                        width="100">
+                                </div>
+                                <div class="card-body">
+                                    <section class="hero is-info is-fullheight is-bold is-centered">
+                                        <div class="hero-body">
+                                            <div class="container">
+                                                <div id=''>
+                                                    <div id='chatborder'>
+                                                        <div id='chat'>
+                                                            
+                                                        </div>
+                                                        
+                                                        <input  class='c-interaction__input' type="text" name="chat" id="chatbox"
+                                                            placeholder="Hi there!" onfocus="placeHolder()">
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-xl-8 col-lg-8 col-md-12">
+                            <div class="card blog-detail">
+                                <div class="card-body">
+                                    <div class="item7-card-img br-7 mb-5"> <img src="{{ article.image.url }}" alt="img"
+                                            class="w-100" >
+                                        <div class="item-card-text-bottom me-0">
+                                            <h4 class="mb-0">{{ article.categorie }}</h4>
+                                        </div>
+                                    </div> <a href="javascript:void(0)" class="text-dark">
+                                        <h2 class="font-weight-semibold">{{ article.title }}</h2>
+                                    </a>
+                                </div>
+                                <p class="p-6 border-top">
+                                    {{ file }}
+                                </p>
+
+
+                            </div>
+
+                        </div> <!--/Coursed Lists-->
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+
+    {{ room_name|json_script:'room-name'}}
+
+<script>
+
+    var message = "", botMessage = "";
+
+    const room = JSON.parse(document.getElementById('room-name').textContent);
+    
+    const chatSocket = new WebSocket(
+        'ws://' + window.location.host + '/ws/' + room + '/'
+    );
+
+    document.onkeypress = function keyPress(e) {
+        var x = e || window.event;
+        var key = (x.keyCode || x.which);
+        if (key == 13) {
+            //if the message from the user isn't empty then run 
+            if (document.getElementById("chatbox").value != "") {
+                //pulls the value from the chatbox ands sets it to lastUserMessage
+                message = document.getElementById("chatbox").value;
+                chatSocket.send( JSON.stringify({ 'message': message }) );
+                //sets the chat box to be clear
+                document.getElementById("chatbox").value = "";
+                //adds the value of the chatbox to the array messages
+                let messages = document.getElementById('chat')
+                messages.insertAdjacentHTML('beforeend',`
+                    <p class="chatlog">${message}</p>`)
+            }
+        }
+    }
+
+    chatSocket.onmessage = function(e) {
+        let data = JSON.parse(e.data);
+        let reponse = document.getElementById('chat');
+
+        //if data.reponse
+        console.log(data);
+
+        if (data.type == 'text') {
+            reponse.insertAdjacentHTML('beforeend',`
+                    <p class="chatlog"><b> botName : </b>${data.text}</p>`);
+        }else {
+            url = window.location.host + '/article/' + data.article
+            reponse.insertAdjacentHTML('beforeend',`
+                    <p class="chatlog"><b> botName : </b>${data.text}  <a href="${data.article}">Click_her</a> </p>`);
+        }
+            
+    }
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    //links
+    //http://eloquentjavascript.net/09_regexp.html
+    //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+
+
+
+    
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //****************************************************************
+    //edit this function to change what the chatbot says
+    
+    
+    
+
+
+
+
+
+
+    //this runs each time enter is pressed.
+    //It controls the overall input and output
+    
+    //clears the placeholder text ion the chatbox
+    //this function is set to run when the users brings focus to the chatbox, by clicking on it
+    function placeHolder() {
+        document.getElementById("chatbox").placeholder = "";
+    }
+</script>
+{% endblock js %}

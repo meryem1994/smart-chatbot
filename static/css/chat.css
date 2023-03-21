@@ -1,0 +1,140 @@
+
+.c-interaction {
+    background-color: #643CFF;
+    width: 250px;
+    height: 50px;
+    border-radius: 100rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    overflow: hidden;
+    position: relative;
+    transform-origin: 0 0;
+    box-shadow: 1px 6px 20px 3px rgba(187, 153, 255, 0.4);
+}
+.c-interaction__button {
+    border-radius: 100rem;
+    border: 0;
+    background: #8364FF;
+    min-width: 50px;
+    min-height: 50px;
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+}
+.c-interaction__button:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    background: rgba(100, 75, 198, 0.5);
+    transition: 0.15s ease;
+    position: absolute;
+    border-radius: inherit;
+}
+.c-interaction__button:hover svg {
+    transform: scale(0.9);
+}
+.c-interaction__button:hover:after {
+    transform: scale(1);
+}
+.c-interaction__button svg {
+    color: #FFFFFF;
+    z-index: 2;
+    position: relative;
+    transform: scale(1);
+    transition: 0.4s ease;
+}
+.c-interaction__input {
+    transition: 0.6s ease;
+    background: #8364FF;
+    border: 0;
+    padding: 1rem;
+    border-radius: 100rem;
+    width: 100%;
+    margin-left: 1rem;
+    color: #FFFFFF;
+    font-size: 1rem;
+    letter-spacing: 1.3px;
+    transform: rotate(0deg);
+    transform-origin: -68px 0px;
+}
+.c-interaction__input::-moz-placeholder {
+    color: #b9f;
+}
+.c-interaction__input:-ms-input-placeholder {
+    color: #b9f;
+}
+.c-interaction__input::placeholder {
+    color: #b9f;
+}
+.c-interaction__menu {
+    position: absolute;
+    left: 73px;
+    transform: rotate(90deg);
+    transform-origin: -200px 10px;
+    transition: 0.4s ease;
+}
+.c-interaction__menu ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.c-interaction__menu li {
+    margin: 0 0.5rem;
+    list-style: none;
+}
+.c-interaction__options input {
+    transition: 0.6s ease;
+    transform: rotate(-90deg);
+}
+.c-interaction__options .c-interaction__menu {
+    transform: rotate(0);
+    transition: 0.4s ease;
+}
+#bodybox {
+    margin: auto;
+    max-width: 550px;
+    font: 15px arial, sans-serif;
+    background-color: white;
+    border-style: solid;
+    border-width: 1px;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+    padding-left: 25px;
+    box-shadow: 5px 5px 5px grey;
+    border-radius: 15px;
+}
+#chatborder {
+    border-style: solid;
+    background-color: #f6f9f6;
+    border-width: 3px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    padding-right: 20px;
+    padding-left: 15px;
+    border-radius: 15px;
+}
+.chatlog {
+    font: 15px arial, sans-serif;
+}
+#chatbox {
+    font: 17px arial, sans-serif;
+    height: 22px;
+    width: 100%;
+}
+h1 {
+    margin: auto;
+}
+pre {
+    background-color: #f0f0f0;
+    margin-left: 20px;
+}

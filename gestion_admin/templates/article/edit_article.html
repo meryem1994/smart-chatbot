@@ -1,0 +1,70 @@
+{% extends '../element/main.html' %}
+{% load static %}
+
+{% block content %}
+<section class="sptb my-dash-1">
+    <div class="container">
+        <div class="row">
+            {% include '../element/menu.html' with name=2 %}
+            <div class="col-xl-9 col-lg-12 col-md-12">
+                <div class="card mb-0">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Article</h3>
+                    </div>
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Title</label> <input name="title"
+                                        type="text" class="form-control" placeholder="Title"
+                                        value="{{ article.title}}"> </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group"> <label class="form-label">Categorie</label> <select name="categorie"
+                                        class="form-control select-show-search border-bottom-0 w-100 select-show-search select-hidden-accessible"
+                                        data-placeholder="Select" data-select-id="9" tabindex="-1"
+                                        aria-hidden="true">
+                                        <optgroup va data-select-id="10">
+                                            <option data-select-id="11" >--Select--</option>
+
+                                            {% for item in categorie %}
+                                                <option value="{{item.name}}" data-select-id="{{item.id}}"
+                                                {% if article.categorie.id == item.id %}
+                                                        selected
+                                                    {% endif %}
+                                                >{{ item.name }}</option>
+                                            {% endfor %}
+                                        </optgroup>
+                                    </select> 
+                                </div>   
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group file-browser"> <input type="text"
+                                        class="form-control bg-transparent border-end-0 browse-file valid"
+                                        placeholder="Upload Images" readonly="" aria-invalid="false"
+                                        > <label class="input-group-btn"> <span
+                                            class="btn btn-primary br-ts-0 br-bs-0" >Browse <input type="file" name="image"
+                                                style="display: none;" accept="image/*"> </span> </label> </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group file-browser"> <input type="text"
+                                        class="form-control bg-transparent border-end-0 browse-file valid"
+                                        placeholder="Upload File" readonly="" aria-invalid="false"
+                                        > <label class="input-group-btn"> <span
+                                            class="btn btn-primary br-ts-0 br-bs-0" >Browse <input type="file" name="file"
+                                                style="display: none;" accept=".txt"> </span> </label> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'articles' 0 %}" class="btn btn-danger" style="color:withe;">Retour</a>
+                        <button type="submit" class="btn btn-primary">Update Profile</button> </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

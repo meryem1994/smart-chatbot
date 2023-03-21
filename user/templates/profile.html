@@ -1,0 +1,109 @@
+{% extends './element/main.html' %}
+{% load static %}
+
+{% block content %}
+<section class="sptb my-dash-1">
+    <div class="container">
+        <div class="row">
+            {% include './element/menu.html' with name=0 %}
+            <div class="col-xl-9 col-lg-12 col-md-12">
+                <div class="card mb-0">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Profile</h3>
+                    </div>
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">First Name</label> <input name="first_name"
+                                        type="text" class="form-control" placeholder="First Name"
+                                        value="{{ request.user.profile.first_name }}"> </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Last Name</label> <input name="last_name"
+                                        type="text" class="form-control" placeholder="Last Name" value="{{ request.user.profile.last_name }}">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-10">
+                                <div class="form-group"> <label class="form-label">Email address</label> <input name='email'
+                                        type="email" class="form-control" placeholder="example@gmail.com"
+                                        value="{{ request.user.profile.email }}"> </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group"> <label class="form-label">Niveau</label> <select name="niveau"
+                                        class="form-control select-show-search border-bottom-0 w-100 select-show-search select-hidden-accessible"
+                                        data-placeholder="Select" data-select-id="9" tabindex="-1"
+                                        aria-hidden="true">
+                                        <optgroup va data-select-id="27">
+                                            <option data-select-id="28" >--Select--</option>
+
+                                            {% for item in niveau %}
+                                                <option value="{{item.name}}" data-select-id="{{item.id}}"
+                                                    {% if request.user.profile.niveau.id == item.id %}
+                                                        selected
+                                                    {% endif %}
+                                                >{{ item.name }}</option>
+                                            {% endfor %}
+
+
+                                        </optgroup>
+                                    </select> 
+                                </div>   
+                            </div>
+
+                            <hr>
+
+
+
+
+
+
+
+                            
+                            
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Facebook</label> <input
+                                        type="text" class="form-control" placeholder="https://www.facebook.com/"
+                                        value="https://www.facebook.com/jacobsmith"> </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Google</label> <input
+                                        type="text" class="form-control" placeholder="https://www.google.com/"
+                                        value="https://www.google.com/jacobsmith"> </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Twitter</label> <input
+                                        type="text" class="form-control" placeholder="https://twitter.com/"
+                                        value="https://www.twitter.com/jacobsmith"> </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <div class="form-group"> <label class="form-label">Pinterest</label> <input
+                                        type="text" class="form-control" placeholder="https://in.pinterest.com/"
+                                        value="https://www.pinterest.com/jacobsmith"> </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group"> <label class="form-label">About Me</label> <textarea
+                                        rows="5" class="form-control"
+                                        placeholder="Enter About your description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atcorrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input-group file-browser"> <input type="text"
+                                        class="form-control bg-transparent border-end-0 browse-file valid"
+                                        placeholder="Upload Images" readonly="" aria-invalid="false"
+                                        value="colorful-logo-icons.png"> <label class="input-group-btn"> <span
+                                            class="btn btn-primary br-ts-0 br-bs-0" >Browse <input type="file" name="image"
+                                                style="display: none;" accept="image/*"> </span> </label> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer"> <button type="submit" class="btn btn-primary">Updated
+                            Profile</button> </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

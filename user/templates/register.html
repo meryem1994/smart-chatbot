@@ -1,0 +1,142 @@
+{% extends './element/main.html' %}
+
+
+{% block css %}{% endblock css %}
+
+
+
+{% block content %}
+    <section class="sptb">
+        <div class="container customerpage">
+            <div class="row">
+                <div class="col-lg-5 col-xl-5 col-md-6 d-block mx-auto">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 col-md-12 register-right">
+                            <ul class="nav nav-tabs nav-justified mb-5 p-2 border" id="myTab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link m-1 border" id="home-tab"
+                                        data-bs-toggle="tab" href="{% url 'login' %}" role="tab" aria-controls="home"
+                                        aria-selected="false">Login</a> </li>
+                                <li class="nav-item"> <a class="nav-link m-1 border active" id="profile-tab"
+                                        data-bs-toggle="tab" href="{% url 'register' %}" role="tab" aria-controls="profile"
+                                        aria-selected="true">Register</a> </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade" id="home" role="tabpanel"
+                                    aria-labelledby="home-tab">
+                                    <div class="card">
+                                        <div class="card-body p-6">
+                                            <div class="mb-6">
+                                                <h5 class="fs-25 font-weight-semibold">Login</h5>
+                                                <p class="fs-16">
+                                                </p>
+                                            </div>
+                                            <div class="single-page customerpage">
+                                                <div class="wrapper wrapper2 box-shadow-0">
+                                                    <form id="login" class="" tabindex="500">
+                                                        <div class="mail"> <label>Mail or Username</label> <input
+                                                                type="email" name="mail"> </div>
+                                                        <div class="passwd"> <label>Password</label> <input
+                                                                type="password" name="password"> </div>
+                                                        <div class="submit"> <a
+                                                                class="btn btn-primary btn-block fs-16"
+                                                                href="index.html">Login</a> </div>
+                                                        <div class="d-flex mb-0">
+                                                            <p class="mb-0"><a href="forgot.html">Forgot
+                                                                    Password</a></p>
+                                                            <p class="text-dark mb-0 ms-auto">Don't have account?<a
+                                                                    href="register.html"
+                                                                    class="text-primary ms-1">Signup</a></p>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-6 border-top">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <h5 class="modal-title fs-20 font-weight-semibold">Login with
+                                                        Social</h5>
+                                                    <p class="fs-16"> </p>
+                                                    <div class="">
+                                                        <div class="btn-group mb-3 mb-lg-0"> <a
+                                                                href="https://www.facebook.com/"
+                                                                class="social-button"> <span
+                                                                    class="fe fe-facebook"></span> Facebook </a>
+                                                        </div>
+                                                        <div class="btn-group mb-3 mb-lg-0"> <a
+                                                                href="https://www.google.com/gmail/"
+                                                                class="social-button"> <span
+                                                                    class="fe fe-linkedin"></span> Linkedin </a>
+                                                        </div>
+                                                        <div class="btn-group mb-3 mb-lg-0"> <a
+                                                                href="https://twitter.com/" class="social-button">
+                                                                <span class="fe fe-twitter"></span> Twitter </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade active show" id="profile" role="tabpanel"
+                                    aria-labelledby="profile-tab">
+                                    <div class="card">
+                                        <div class="card-body p-6">
+                                            <div class="mb-6">
+                                                <h5 class="fs-25 font-weight-semibold">Register</h5>
+                                                <p class="fs-16">
+                                                </p>
+                                            </div>
+                                            <div class="single-page customerpage">
+                                                <div class="wrapper wrapper2 box-shadow-0">
+                                                    <form method="post" id="register" class="" tabindex="500">
+                                                        {% csrf_token %}
+                                                        <div class="mail"> <label>Username</label> <input
+                                                                type="text" name="username"> </div>
+                                                        <div class="passwd"> <label>Password</label> <input
+                                                                type="password" name="password"> </div>
+                                                        <div class="passwd"> <label>Confirmation Password</label> <input
+                                                            type="password" name="Confirmation_password"> </div>
+                                                        <div class="submit"> <button type="submit" class="btn btn-primary btn-block">Register</button> </div>
+                                                        <p class="text-dark mb-0">Already have an account?<a
+                                                                href="{% url 'login' %}" class="text-primary ms-1">Sign
+                                                                In</a></p>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body p-6 border-top">
+                                            <div class="d-flex">
+                                                <div>
+                                                    <h5 class="modal-title fs-20 font-weight-semibold">Register with
+                                                        Social</h5>
+                                                    <p class="fs-16">If you are going to use a passage of Lorem
+                                                        Ipsum</p>
+                                                    <div class="">
+                                                        <div class="btn-group"> <a href="https://www.facebook.com/"
+                                                                class="social-button"> <span
+                                                                    class="fe fe-facebook"></span> Facebook </a>
+                                                        </div>
+                                                        <div class="btn-group"> <a
+                                                                href="https://www.google.com/gmail/"
+                                                                class="social-button"> <span
+                                                                    class="fe fe-linkedin"></span> Linkedin </a>
+                                                        </div>
+                                                        <div class="btn-group"> <a href="https://twitter.com/"
+                                                                class="social-button"> <span
+                                                                    class="fe fe-twitter"></span> Twitter </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

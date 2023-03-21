@@ -1,0 +1,123 @@
+{% extends '../element/main.html' %}
+
+{% block content %}
+<section class="sptb">
+    <div class="container">
+        <div class="row">
+
+            {% include '../element/menu.html' with name=1 %}
+
+            <div class="col-xl-9 col-lg-12 col-md-12">
+                <div class="card mb-0">
+                    <div class="card-header">
+                        <h3 class="card-title">Profiles</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="ads-tabs">
+                            <div class="tabs-menus"> <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class=""><a href="#tab1" class="active" data-bs-toggle="tab">All Profiles
+                                            <span class="ms-3 badge badge-primary">{{n_t}}</span></a></li>
+                                    <!--<li><a href="#tab5" data-bs-toggle="tab">Active <span class="ms-3 badge badge-primary">3</span></a></li>
+                                    <li><a href="#tab6" data-bs-toggle="tab">Expired <span class="ms-3 badge badge-primary">1</span></a></li>-->
+                                </ul>
+                            </div>
+                            <div class="tab-content">
+                                <div class="tab-pane  active table-responsive userprof-tab" id="tab1">
+                                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 select2-sm no-footer">
+                                        <div class="row">
+                                          
+                                            <div class="col-xl-6 col-sm-12 col-lg-6 col-md-12">
+                                                <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                                    <label>Search:<input type="search" class="form-control select2-sm form-control-sm" placeholder="" aria-controls="DataTables_Table_0"></label></div>
+                                                    
+                                            </div>
+                                            <div class="col-xl-6 col-sm-12 col-lg-6 col-md-12">
+                                                <!--<button type="button" class="btn btn-primary col-xl-3 col-sm-5 col-lg-3 col-md-5" style="float:right;">Create</button>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <br><br><table class="data-table-example table table-bordered table-hover mb-0 text-nowrap dataTable no-footer" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Courses: activate to sort column ascending" style="width: 222.422px;">Username</th>
+                                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending" style="width: 99.25px;">Role</th>
+                                                          
+                                                            <!--<th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 53.9531px;">Status</th>-->
+                                                            <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 121.297px;">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for item in profiles %}
+                                                            <tr class="{% cycle 'odd' 'even' %}">
+                                                                <td>
+                                                                    <div class="media mt-0 mb-0">
+                                                                        <div class="card-aside-img"> <a href="javascript:void(0)"></a> <img src="{{item.image.url}}" alt="img" style="width:5px;"> </div>
+                                                                        <div class="media-body">
+                                                                            <div class="card-item-desc ms-2 p-0 mt-0">
+                                                                                <a href="javascript:void(0)" class="text-dark">
+                                                                                    <h4 class="font-weight-bold">{{item.user.username}}</h4>
+                                                                             </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>{{ item.user.groups.all.0.name }}</td>
+                                                            
+                                                                <!--<td> <a href="javascript:void(0)" class="btn btn-warning btn-sm">Published</a>
+                                                                </td>-->
+                                                                <td> <a href="{% url 'profile_edit' item.id %}" class="btn btn-outline-light btn-sm text-dark waves-effect waves-light bg-info" data-bs-toggle="tooltip" data-bs-original-title="Edit"><i class="fa fa-edit fs-16"></i></a> 
+                                                                    <a onClick= class="btn btn-outline-light btn-sm text-dark waves-effect waves-light bg-dark" data-bs-toggle=" tooltip"="" data-bs-original-title="Delete"><i class="fa fa-trash fs-16"></i></a>  </td>
+                                                            </tr>  
+                                                        {% endfor %}    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <br> <br>
+
+                                        {% if n_t > 10 %}
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-5">
+                                                    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Showing 1 to {{profiles|length}} of {{n_t}}
+                                                        entries</div>
+                                                </div>
+                                                <div class="col-sm-12 col-md-7">
+                                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                                                        <ul class="pagination">
+                                                            <li class="paginate_button page-item previous {% if profiles.0.id == 1 %}disabled{% endif %}" id="DataTables_Table_0_previous"><a href="{% url 'profile' n_p %}" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
+                                                            
+                                                            
+                                                            {% for item in p %}
+                                                                <li class="paginate_button page-item {% if pos == item %}active{% endif %}"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="{{item}}" tabindex="0" class="page-link">{{item}}</a></li>
+                                                            {% endfor %}
+                                                            <!--<li class="paginate_button page-item active"><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                                            <li class="paginate_button page-item "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>-->
+
+
+
+
+                                                            <li class="paginate_button page-item next {% if p|last == pos %}disabled{% endif %}" id="DataTables_Table_0_next"><a href="{% url 'profile' n_n %}" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0" class="page-link">Next</a></li>
+                                                        </ul>
+                                                        <br>                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}
